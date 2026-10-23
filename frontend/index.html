@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPilot — AI Study Companion</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">SP</div>
+        <div>
+          <h1>StudyPilot</h1>
+          <p class="tagline">Alexa-style AI study companion</p>
+        </div>
+      </div>
+      <div class="header-badge">Powered by Amazon Bedrock</div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- Input panel -->
+      <section class="panel input-panel">
+        <h2>Your Notes</h2>
+        <p class="hint">Paste your lecture notes (min 50 characters). StudyPilot will turn them into a personalized revision plan.</p>
+        
+        <textarea 
+          id="notes" 
+          placeholder="Paste your study notes here...
+
+Example:
+Process: program in execution.
+Process states: new, ready, running, waiting, terminated.
+CPU scheduling decides which process runs next.
+FCFS: first come, first served.
+SJF: shortest job first.
+Round Robin: each process gets a time quantum.
+Deadlock: processes wait for each other forever.
+Conditions: mutual exclusion, hold and wait, no preemption, circular wait."
+          rows="12"
+        ></textarea>
+        
+        <div class="char-count">
+          <span id="charCount">0</span> / 5000 characters
+        </div>
+
+        <div class="goals">
+          <h3>Choose your goal</h3>
+          <div class="goal-buttons">
+            <button class="goal-btn active" data-goal="Revise today">
+              <span class="goal-icon">📚</span>
+              <span class="goal-title">Revise today</span>
+              <span class="goal-desc">5-point summary + 90-min plan</span>
+            </button>
+            <button class="goal-btn" data-goal="Make quiz">
+              <span class="goal-icon">❓</span>
+              <span class="goal-title">Make quiz</span>
+              <span class="goal-desc">5 practice questions + answers</span>
+            </button>
+            <button class="goal-btn" data-goal="Explain simply">
+              <span class="goal-icon">💡</span>
+              <span class="goal-title">Explain simply</span>
+              <span class="goal-desc">Hardest concept in plain English</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="primary-btn">
+          <span class="btn-text">Generate Study Plan</span>
+          <span class="btn-loader hidden">
+            <span class="spinner"></span>
+            Thinking…
+          </span>
+        </button>
+      </section>
+
+      <!-- Output panel -->
+      <section class="panel output-panel">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">🧠</div>
+          <h3>Ready when you are</h3>
+          <p>Paste your notes, pick a goal, and StudyPilot will create a personalized revision pack from <em>your</em> material.</p>
+        </div>
+
+        <div id="resultArea" class="result-area hidden">
+          <div class="result-header">
+            <h2>Your Study Pack</h2>
+            <span id="storedBadge" class="stored-badge hidden">Stored privately in S3</span>
+          </div>
+          <div id="resultContent" class="result-content"></div>
+          <button id="copyBtn" class="secondary-btn">Copy to clipboard</button>
+        </div>
+
+        <div id="errorArea" class="error-area hidden">
+          <p id="errorText"></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Built with Amazon EC2 · Apache · Amazon Bedrock · Amazon S3 · IAM · EBS</p>
+      <p class="footer-note">Notes are stored privately. No public access.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
